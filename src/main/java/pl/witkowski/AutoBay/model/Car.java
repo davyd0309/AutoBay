@@ -1,19 +1,17 @@
 package pl.witkowski.AutoBay.model;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
-//@Entity
+@Entity
 @Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
 
     @Id
@@ -49,4 +47,7 @@ public class Car {
     private String condition;
 
     private Boolean postCrash;
+
+    @OneToOne()
+    private Auction auction;
 }

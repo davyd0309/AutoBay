@@ -14,8 +14,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Auction {
 
-//    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "user")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "car")
+    private Car car;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

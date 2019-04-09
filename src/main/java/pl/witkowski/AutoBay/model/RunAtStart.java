@@ -18,14 +18,17 @@ public class RunAtStart {
 
     private AuctionRepository auctionRepository;
 
+    private CarRepository carRepository;
+
     @Autowired
-    public RunAtStart(UserRepository userRepository, RoleRepository roleRepository, AuctionRepository auctionRepository) {
+    public RunAtStart(UserRepository userRepository, RoleRepository roleRepository, AuctionRepository auctionRepository, CarRepository carRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.auctionRepository = auctionRepository;
+        this.carRepository = carRepository;
     }
 
-//    @PostConstruct
+    @PostConstruct
     public void runAtStart(){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -52,29 +55,46 @@ public class RunAtStart {
         user2.setActive(true);
 
 
-        BigDecimal bd1 = new BigDecimal("212.000");
-        BigDecimal bd2 = new BigDecimal("787.000");
+        Car car1 = new Car();
+        Car car2 = new Car();
 
+        car1.setCapacity(5996);
+        car1.setCategory("passenger car");
+        car1.setCondition("used");
+        car1.setColor("red");
+        car1.setDoors(4);
+        car1.setFuel("petrol");
+        car1.setGearbox("automatic");
+        car1.setMake("Ferrari");
+        car1.setMileage(12000);
+        car1.setModel("599 GTO");
+        car1.setPostCrash(false);
+        car1.setPower(670);
+        car1.setSeats(2);
+        car1.setType("supercar");
+        car1.setYear(2010);
+//        car1.setAuction();
 
+        car2.setCapacity(280);
+        car2.setCategory("heavy goods vehicle");
+        car2.setCondition("used");
+        car2.setColor("white");
+        car2.setDoors(4);
+        car2.setFuel("diesel");
+        car2.setGearbox("5-speed manual");
+        car2.setMake("VW");
+        car2.setMileage(278000);
+        car2.setModel("LT28");
+        car2.setPostCrash(true);
+        car2.setPower(150);
+        car2.setSeats(3);
+        car2.setType("Truck");
+        car2.setYear(1985);
+//        car2.setAuction();
 
+        carRepository.save(car1);
+        carRepository.save(car2);
 
-        Auction auction1 = new Auction();
-        Auction auction2 = new Auction();
-
-        auction1.setStartTime(LocalDate.of(2019,04,05));
-        auction1.setFinishTime(LocalDate.of(2019,05,05));
-        auction1.setPrice(bd1);
-        auction1.setUser(user1);
-
-
-        auction2.setStartTime(LocalDate.of(2019,04,21));
-        auction2.setFinishTime(LocalDate.of(2019,05,20));
-        auction2.setPrice(bd2);
-        auction2.setUser(user2);
-
-
-        auctionRepository.save(auction1);
-        auctionRepository.save(auction2);
 
 
         Role role1 = new Role();
@@ -95,5 +115,35 @@ public class RunAtStart {
 
         userRepository.save(user1);
         userRepository.save(user2);
+
+
+
+
+        BigDecimal bd1 = new BigDecimal("21200.00");
+        BigDecimal bd2 = new BigDecimal("1787000.00");
+
+
+        Auction auction1 = new Auction();
+        Auction auction2 = new Auction();
+
+        auction1.setStartTime(LocalDate.of(2019,04,05));
+        auction1.setFinishTime(LocalDate.of(2019,05,05));
+        auction1.setPrice(bd1);
+        auction1.setUser(user1);
+        auction1.setCar(car1);
+
+
+
+        auction2.setStartTime(LocalDate.of(2019,04,21));
+        auction2.setFinishTime(LocalDate.of(2019,05,20));
+        auction2.setPrice(bd2);
+        auction2.setUser(user2);
+        auction2.setCar(car2);
+
+
+        auctionRepository.save(auction1);
+        auctionRepository.save(auction2);
+
+
     }
 }

@@ -56,11 +56,11 @@ public class User {
     @CreationTimestamp
     private LocalDate created;
 
-//    @Transient
+    @Transient
     private String fullName;
 
     private boolean active;
 
-//    @OneToMany()
-//    private Auction auction;
+    @OneToOne()
+    private Auction auction;
 }
