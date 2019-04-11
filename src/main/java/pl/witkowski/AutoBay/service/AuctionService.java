@@ -1,4 +1,4 @@
-package pl.witkowski.AutoBay.model;
+package pl.witkowski.AutoBay.service;
 
 import org.springframework.stereotype.Service;
 

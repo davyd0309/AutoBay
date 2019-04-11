@@ -1,8 +1,11 @@
 package pl.witkowski.AutoBay.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.witkowski.AutoBay.repository.AuctionRepository;
+import pl.witkowski.AutoBay.repository.CarRepository;
+import pl.witkowski.AutoBay.repository.RoleRepository;
+import pl.witkowski.AutoBay.repository.UserRepository;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
@@ -30,7 +33,7 @@ public class RunAtStart {
 
     @PostConstruct
     public void runAtStart(){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 
         User user1 =new User();
@@ -39,18 +42,18 @@ public class RunAtStart {
         user1.setName("Konrad");
         user1.setLastName("Dawydiuk");
         user1.setEmail("konrad@gmail.com");
-        user1.setPassword(bCryptPasswordEncoder.encode("Haslo12"));
+        user1.setPassword("Haslo12");  //bCryptPasswordEncoder.encode(
         user1.setCreated(LocalDate.of(2019,03,07));
-        user1.setUserName("kowala12");
+        user1.setUsername("kowala12");
         user1.setFullName("Adam Kowal");
         user1.setActive(true);
 
         user2.setName("Adam1");
         user2.setLastName("Kowal1");
         user2.setEmail("a.kowal1@gmail.com");
-        user2.setPassword(bCryptPasswordEncoder.encode("Haslo22"));
+        user2.setPassword("Haslo22"); //bCryptPasswordEncoder.encode(
         user2.setCreated(LocalDate.of(2019,03,06));
-        user2.setUserName("kowala22");
+        user2.setUsername("kowala22");
         user2.setFullName("Adam Kowal1");
         user2.setActive(true);
 

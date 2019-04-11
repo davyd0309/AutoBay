@@ -16,8 +16,11 @@ import javax.persistence.Id;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)  // tu jest identity a w reszcie jest AUTO
     private Long id;
 
     private String role;
+
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users = new HashSet<>();
 }

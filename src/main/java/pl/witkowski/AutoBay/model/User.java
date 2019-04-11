@@ -32,7 +32,7 @@ public class User {
     @NotEmpty
     @Column(unique = true)
     @Size(min = 4)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Size(min = 3)
@@ -44,6 +44,10 @@ public class User {
 
     @NotBlank
     private String password;
+
+//    @NotBlank
+    @Transient
+    private String passwordConfirm;
 
     @NotEmpty
     @Email
