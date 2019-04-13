@@ -1,70 +1,63 @@
 package pl.witkowski.AutoBay.model;
 
-import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "user")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
-
-    @NotEmpty
-    @Column(unique = true)
-    @Size(min = 4)
     private String username;
 
-    @NotBlank
-    @Size(min = 3)
-    private String name;
-
-    @NotBlank
-    @Size(min = 4)
-    private String lastName;
-
-    @NotBlank
     private String password;
 
-//    @NotBlank
     @Transient
     private String passwordConfirm;
 
-    @NotEmpty
-    @Email
-    @Column(unique = true)
-    private String email;
+    @ManyToMany
+    private Set<Role> roles = new HashSet<>();
 
-    @ColumnDefault("1")
-    private int enabled;
+    public Long getId() {
+        return id;
+    }
 
-    @CreationTimestamp
-    private LocalDate created;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Transient
-    private String fullName;
+    public String getUsername() {
+        return username;
+    }
 
-    private boolean active;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    @OneToOne()
-    private Auction auction;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
